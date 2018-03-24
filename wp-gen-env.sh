@@ -86,9 +86,21 @@ sed -i "s/SENHA-ROOT/$root_password/g" docker-compose.yml
 sed -i "s/PHP-VERSION/$php_version/g" docker-compose.yml
 sed -i "s/APACHE-ROOT/$apache_root/g" docker-compose.yml
 
+# Baixa a instalação vazia do wordpress automaticamente
+cd public
+wget https://wordpress.org/latest.tar.gz
+tar -xzf latest.tar.gz
+mv wordpress/* .
+rm -r wordpress
+rm latest.tar.gz
+cd ..
+
 # Exibe estrutura de arquivos
 echo 'Estrutura criada com sucesso:'
+echo 'Local: /'
 ls -la
+echo 'Local: /public'
+ls -la public
 echo ''
 
 if [ $(docker ps -a -q -f name="$project_title-web") ] || [ $(docker ps -a -q -f name="$project_title-db") ]; then
