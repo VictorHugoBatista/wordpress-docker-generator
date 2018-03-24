@@ -1,5 +1,5 @@
-# php-mysql-docker-generator
-Gera automaticamente a estrutura para a criação de ambientes web PHP, Apache e MySQL com docker-compose.
+# wordpress-docker-generator
+Gera automaticamente a estrutura para a criação de ambientes web PHP, Apache e MySQL com docker-compose, adicionando uma instalação wordpress limpa na raíz da /public.
 
 ## Requisitos
  * Sistema que permita a execução de [shell scripts](https://pt.wikipedia.org/wiki/Shell_script)
@@ -13,7 +13,7 @@ Gera automaticamente a estrutura para a criação de ambientes web PHP, Apache e
  ```
  * Execute o arquivo por meio do comando **./installer.sh**;
  * O script irá instalar o comando gerador de ambientes após uma mensagem de confirmação;
- * Após isso o comando **docker-gen-env** estará disponível. O comando pode ser executado sem parãmetros para a exibição da ajuda.
+ * Após isso o comando **wp-gen-env** estará disponível. O comando pode ser executado sem parãmetros para a exibição da ajuda.
  
 ## Atualização / desinstalação
 * Com o comando já disponível no sistema, execute o arquivo installer.sh por meio de **./installer.sh**;
@@ -29,11 +29,11 @@ Gera automaticamente a estrutura para a criação de ambientes web PHP, Apache e
     * Versão do PHP utilizada no ambiente. Padrão: **latest** (ver https://hub.docker.com/r/webgriffe/php-apache-base/tags/);
     * Raíz do Apache: Diretório à partir de **/var/html/www** (diretório **public** na raíz da estrutura de diretórios criada).
  * Exemplo:
-    * **docker-gen-env projeto-teste test.dev base-teste root 5.6 public**
+    * **wp-gen-env projeto-teste test.dev base-teste root 5.6 public**
  * Ao executar o comando exbido acima, a seguinte estrutura será criada à partir do seu diretório atual (**você ainda pode prosseguir ou cancelar antes que a estrutura seja gerada**):
   ```
   - projeto-teste
-  |- public (raíz do apache do docker)
+  |- public (raíz do apache do docker, com a instalação wordpress limpa incluída)
   |- mysql (diretório de armazenamendo dos dados do mysql do docker)
   |- docker-compose.yml (arquivo já com as configurações iniciais)
   ```
