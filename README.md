@@ -33,7 +33,7 @@ Gera automaticamente a estrutura para a criação de ambientes web PHP, Apache e
  * Ao executar o comando exbido acima, a seguinte estrutura será criada à partir do seu diretório atual (**você ainda pode prosseguir ou cancelar antes que a estrutura seja gerada**):
   ```
   - projeto-teste
-  |- public (raíz do apache do docker, com a instalação wordpress limpa incluída)
+  |- public (raíz do apache do docker, com uma instalação wordpress limpa incluída)
   |- mysql (diretório de armazenamendo dos dados do mysql do docker)
   |- docker-compose.yml (arquivo já com as configurações iniciais)
   ```

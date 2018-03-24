@@ -35,7 +35,7 @@ apache_root=`[ $6 ] && echo "$6" || echo ''`
 
 echo 'A seguinte estrutura será criada neste diretório:'
 echo " - $project_title"
-echo ' |- public (raíz do apache do docker)'
+echo ' |- public (raíz do apache do docker, com uma instalação wordpress limpa incluída)'
 echo ' |- mysql (dados armazenados pelo mysql do docker)'
 echo ' |- docker-compose.yml (gera os containeres do apache/php e do mysql e os relaciona)'
 echo ''
