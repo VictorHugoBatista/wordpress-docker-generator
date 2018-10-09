@@ -1,7 +1,12 @@
 #!/bin/bash
 
+RED="\e[91m"
+GREEN="\e[92m"
+BLUE="\e[94m"
+RESET="\e[0m"
+
 if [ $# -lt 4 ]; then
-    echo
+    echo -e "$BLUE"
     echo 'Y8b Y8b Y888P                       888 888 88e'
     echo ' Y8b Y8b Y8P   e88 88e  888,8,  e88 888 888 888D 888,8,  ,e e,   dP"Y  dP"Y'
     echo '  Y8b Y8b Y   d888 888b 888 "  d888 888 888 88"  888 "  d88 88b C88b  C88b'
@@ -12,7 +17,7 @@ if [ $# -lt 4 ]; then
     echo '|  _  ||  _  |  __||    <|  -__|   _|______|  _  |  -__|     |  -__|   _|  _  ||   _|  _  |   _|'
     echo '|_____||_____|____||__|__|_____|__|        |___  |_____|__|__|_____|__| |___._||____|_____|__|'
     echo '                                           |_____|'
-    echo
+    echo -e "$RESET"
     echo 'Parâmetros esperados:'
     echo ' - título do projeto'
     echo ' - virtual host'
@@ -33,6 +38,7 @@ root_password=$4
 php_version=`[ $5 ] && echo $5 || echo 'latest'`
 apache_root=`[ $6 ] && echo "$6" || echo ''`
 
+echo -e "$BLUE"
 echo 'A seguinte estrutura será criada neste diretório:'
 echo " - $project_title"
 echo ' |- public (raíz do apache do docker, com uma instalação wordpress limpa incluída)'
@@ -47,18 +53,18 @@ echo "   - Virtual host: $virtual_host"
 echo " - $project_title-db (mysql)"
 echo "   - Nome do banco: $database_name"
 echo "   - Senha do root: $root_password"
-echo ''
+echo -e "$RESET"
 
 # Pede confirmação sobre a estrutura à ser criada
 continue_process=''
 while [ "$continue_process" = '' ] || [ "$continue_process" != 's' ] && [ "$continue_process" != 'n' ]; do
-    echo 'Pressione "s" ou "n" para prosseguir:'
+    echo -e "Digite ${GREEN}s$RESET para prosseguir ou ${RED}n$RESET para cancelar: \c"
     read continue_process
 done
 
 # Para a execução caso a opção selecionada foi 'n'
 if [ "$continue_process" = 'n' ]; then
-    echo 'A operação foi cancelada!'
+    echo -e "${RED}A operação foi cancelada!${RESET}"
     exit 0
 fi
 
@@ -66,7 +72,7 @@ fi
 # sugerido para ser o diretório raíz do site. Se
 # sim, para o programa com status 1.
 if [ -e $project_title ]; then
-    echo "Um arquivo/diretório de nome $project_title já existe!"
+    echo -e "${RED}Um arquivo/diretório de nome $project_title já existe!${RESET}"
     exit 1
 fi
 
@@ -96,15 +102,16 @@ rm latest.tar.gz
 cd ..
 
 # Exibe estrutura de arquivos
+echo -e "$GREEN"
 echo 'Estrutura criada com sucesso:'
 echo 'Local: /'
 ls -la
 echo 'Local: /public'
 ls -la public
-echo ''
+echo -e "$RESET"
 
 if [ $(docker ps -a -q -f name="$project_title-web") ] || [ $(docker ps -a -q -f name="$project_title-db") ]; then
-    echo 'Já existem containeres com o mesmo nome da estrutura criada!'
+    echo -e '${RED}Já existem containeres com o mesmo nome da estrutura criada!${RESET}'
     exit 1
 fi
 
