@@ -14,8 +14,7 @@ if [ -e $script_file ]; then
     # Pede confirmação sobre a estrutura à ser criada
     opcao=''
     while [ "$opcao" = '' ] || [ "$opcao" != '1' ] && [ "$opcao" != '2' ]; do
-        echo 'Entre com uma das opções para prosseguir:'
-        read opcao
+        read -p 'Entre com uma das opções para prosseguir: ' opcao
     done
 
     if [ "$opcao" = '1' ]; then
@@ -31,8 +30,7 @@ echo 'Digite "s" para prosseguir ou "n" para cancelar:'
 # Pede confirmação sobre a estrutura à ser criada
 continue_process=''
 while [ "$continue_process" = '' ] || [ "$continue_process" != 's' ] && [ "$continue_process" != 'n' ]; do
-    echo 'Pressione "s" ou "n" para prosseguir:'
-    read continue_process
+    read -p 'Pressione "s" ou "n" para prosseguir: ' continue_process
 done
 # Para a execução caso a opção selecionada foi 'n'
 if [ "$continue_process" = 'n' ]; then
