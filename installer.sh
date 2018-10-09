@@ -35,12 +35,12 @@ fi
 # Pede confirmação sobre a estrutura à ser criada
 continue_process=''
 while [ "$continue_process" = '' ] || [ "$continue_process" != 's' ] && [ "$continue_process" != 'n' ]; do
-    echo -e "Digite ${GREEN}s$RESET para prosseguir ou ${RED}n$RESET para cancelar: "
+    echo -e "Digite ${GREEN}s$RESET para prosseguir ou ${RED}n$RESET para cancelar: \c"
     read continue_process
 done
 # Para a execução caso a opção selecionada foi 'n'
 if [ "$continue_process" = 'n' ]; then
-    echo 'A operação foi cancelada!'
+    echo -e "${RED}A operação foi cancelada!${RESET}"
     exit 0
 fi
 
@@ -62,3 +62,4 @@ else
     echo -e "Comando ${BLUE}${script_name}${RESET} instalado com sucesso!"
 fi
 
+exit 0
