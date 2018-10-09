@@ -38,17 +38,27 @@ while [ "$continue_process" = '' ] || [ "$continue_process" != 's' ] && [ "$cont
     echo -e "Digite ${GREEN}s$RESET para prosseguir ou ${RED}n$RESET para cancelar: \c"
     read continue_process
 done
+
 # Para a execução caso a opção selecionada foi 'n'
 if [ "$continue_process" = 'n' ]; then
     echo -e "${RED}A operação foi cancelada!${RESET}"
     exit 0
 fi
 
+# Instalação / atualização do script.
+install_scripts() {
+    script_name=$1
+    bin_path=$2
+    compose_sample=$3
+    script_file=$4
+    sudo cp -rf $compose_sample $bin_path
+    sudo cp -rf $script_name.sh $script_file
+    sudo chmod +x $script_file
+}
+
 if [ -e $script_file ]; then
     if [ "$opcao" = '1' ]; then
-        sudo cp -rf $compose_sample $bin_path
-        sudo cp -rf $script_name.sh $script_file
-        sudo chmod +x $script_file
+        install_scripts $script_name $bin_path $compose_sample $script_file
         echo -e "Comando ${BLUE}${script_name}${RESET} atualizado com sucesso!"
     else
         sudo rm $compose_file
@@ -56,9 +66,7 @@ if [ -e $script_file ]; then
         echo -e "Comando ${BLUE}${script_name}${RESET} desinstalado com sucesso!"
     fi
 else
-    sudo cp $compose_sample $bin_path
-    sudo cp $script_name.sh $script_file
-    sudo chmod +x $script_file
+    install_scripts $script_name $bin_path $compose_sample $script_file
     echo -e "Comando ${BLUE}${script_name}${RESET} instalado com sucesso!"
 fi
 
