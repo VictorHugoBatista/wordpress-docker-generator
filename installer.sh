@@ -24,12 +24,12 @@ if [ -e $script_file ]; then
     done
 
     if [ "$opcao" = '1' ]; then
-        echo "O arquivo $script_name será atualizado no diretório $bin_path"
+        echo -e "O arquivo ${BLUE}${script_name}${RESET} será atualizado no diretório $bin_path"
     else
-        echo "O arquivo $script_name será removido do diretório $bin_path"
+        echo -e "O arquivo ${BLUE}${script_name}${RESET} será removido do diretório $bin_path"
     fi
 else
-    echo "O arquivo $script_name será adicionado ao diretório $bin_path"
+    echo -e "O arquivo ${BLUE}${script_name}${RESET} será adicionado ao diretório $bin_path"
 fi
 
 # Pede confirmação sobre a estrutura à ser criada
@@ -49,16 +49,16 @@ if [ -e $script_file ]; then
         sudo cp -rf $compose_sample $bin_path
         sudo cp -rf $script_name.sh $script_file
         sudo chmod +x $script_file
-        echo "Comando $script_name atualizado com sucesso!"
+        echo -e "Comando ${BLUE}${script_name}${RESET} atualizado com sucesso!"
     else
         sudo rm $compose_file
         sudo rm $script_file
-        echo "Comando $script_name desinstalado com sucesso!"
+        echo -e "Comando ${BLUE}${script_name}${RESET} desinstalado com sucesso!"
     fi
 else
     sudo cp $compose_sample $bin_path
     sudo cp $script_name.sh $script_file
     sudo chmod +x $script_file
-    echo "Comando $script_name instalado com sucesso!"
+    echo -e "Comando ${BLUE}${script_name}${RESET} instalado com sucesso!"
 fi
 
