@@ -5,10 +5,16 @@ script_file="$bin_path/$script_name"
 compose_sample='docker-compose-sample.yml'
 compose_file="$bin_path/$compose_sample"
 
+# Cores utilizados no script.
+RED="\e[91m"
+GREEN="\e[92m"
+BLUE="\e[94m"
+RESET="\e[0m"
+
 if [ -e $script_file ]; then
     echo 'Operações disponíveis:'
-    echo '1 - Atualizar'
-    echo '2 - Remover'
+    echo -e "${GREEN}1 - Atualizar$RESET"
+    echo -e "${RED}2 - Remover$RESET"
     echo
 
     # Pede confirmação sobre a estrutura à ser criada
@@ -25,12 +31,12 @@ if [ -e $script_file ]; then
 else
     echo "O arquivo $script_name será adicionado ao diretório $bin_path"
 fi
-echo 'Digite "s" para prosseguir ou "n" para cancelar:'
 
 # Pede confirmação sobre a estrutura à ser criada
 continue_process=''
 while [ "$continue_process" = '' ] || [ "$continue_process" != 's' ] && [ "$continue_process" != 'n' ]; do
-    read -p 'Pressione "s" ou "n" para prosseguir: ' continue_process
+    echo -e "Digite ${GREEN}s$RESET para prosseguir ou ${RED}n$RESET para cancelar: "
+    read continue_process
 done
 # Para a execução caso a opção selecionada foi 'n'
 if [ "$continue_process" = 'n' ]; then
