@@ -1,29 +1,29 @@
 #!/bin/bash
 
 if [ $# -lt 4 ]; then
-	echo
-	echo 'Y8b Y8b Y888P                       888 888 88e'
-	echo ' Y8b Y8b Y8P   e88 88e  888,8,  e88 888 888 888D 888,8,  ,e e,   dP"Y  dP"Y'
-	echo '  Y8b Y8b Y   d888 888b 888 "  d888 888 888 88"  888 "  d88 88b C88b  C88b'
-	echo '   Y8b Y8b    Y888 888P 888    Y888 888 888      888    888   ,  Y88D  Y88D'
-	echo '    Y8P Y      "88 88"  888     "88 888 888      888     "YeeP" d,dP  d,dP'
-	echo '    __              __                                                          __'
-	echo '.--|  |.-----.----.|  |--.-----.----.______.-----.-----.-----.-----.----.---.-.|  |_.-----.----.'
-	echo '|  _  ||  _  |  __||    <|  -__|   _|______|  _  |  -__|     |  -__|   _|  _  ||   _|  _  |   _|'
-	echo '|_____||_____|____||__|__|_____|__|        |___  |_____|__|__|_____|__| |___._||____|_____|__|'
-	echo '                                           |_____|'
-	echo
-	echo 'Parâmetros esperados:'
-	echo ' - título do projeto'
-	echo ' - virtual host'
-	echo ' - nome do banco'
-	echo ' - senha do root'
-        echo ' - versão do php (opcional)'
-	echo ' - raíz do apache à partir de /var/html/www (opcional)'
-	echo
-	echo "Exemplo de comando completo: ${0##*/} projeto-teste test.dev base-teste root 5.6 public"
-	echo 'Repositório do projeto: https://github.com/VictorHugoBatista/wordpress-docker-generator'
-	exit 0
+    echo
+    echo 'Y8b Y8b Y888P                       888 888 88e'
+    echo ' Y8b Y8b Y8P   e88 88e  888,8,  e88 888 888 888D 888,8,  ,e e,   dP"Y  dP"Y'
+    echo '  Y8b Y8b Y   d888 888b 888 "  d888 888 888 88"  888 "  d88 88b C88b  C88b'
+    echo '   Y8b Y8b    Y888 888P 888    Y888 888 888      888    888   ,  Y88D  Y88D'
+    echo '    Y8P Y      "88 88"  888     "88 888 888      888     "YeeP" d,dP  d,dP'
+    echo '    __              __                                                          __'
+    echo '.--|  |.-----.----.|  |--.-----.----.______.-----.-----.-----.-----.----.---.-.|  |_.-----.----.'
+    echo '|  _  ||  _  |  __||    <|  -__|   _|______|  _  |  -__|     |  -__|   _|  _  ||   _|  _  |   _|'
+    echo '|_____||_____|____||__|__|_____|__|        |___  |_____|__|__|_____|__| |___._||____|_____|__|'
+    echo '                                           |_____|'
+    echo
+    echo 'Parâmetros esperados:'
+    echo ' - título do projeto'
+    echo ' - virtual host'
+    echo ' - nome do banco'
+    echo ' - senha do root'
+    echo ' - versão do php (opcional)'
+    echo ' - raíz do apache à partir de /var/html/www (opcional)'
+    echo
+    echo "Exemplo de comando completo: ${0##*/} projeto-teste test.dev base-teste root 5.6 public"
+    echo 'Repositório do projeto: https://github.com/VictorHugoBatista/wordpress-docker-generator'
+    exit 0
 fi
 
 project_title=$1
@@ -52,22 +52,22 @@ echo ''
 # Pede confirmação sobre a estrutura à ser criada
 continue_process=''
 while [ "$continue_process" = '' ] || [ "$continue_process" != 's' ] && [ "$continue_process" != 'n' ]; do
-	echo 'Pressione "s" ou "n" para prosseguir:'
-	read continue_process
+    echo 'Pressione "s" ou "n" para prosseguir:'
+    read continue_process
 done
 
 # Para a execução caso a opção selecionada foi 'n'
 if [ "$continue_process" = 'n' ]; then
-	echo 'A operação foi cancelada!'
-	exit 0
+    echo 'A operação foi cancelada!'
+    exit 0
 fi
 
 # Verifica a existência de um arquivo com o nome
 # sugerido para ser o diretório raíz do site. Se
 # sim, para o programa com status 1.
 if [ -e $project_title ]; then
-	echo "Um arquivo/diretório de nome $project_title já existe!"
-	exit 1
+    echo "Um arquivo/diretório de nome $project_title já existe!"
+    exit 1
 fi
 
 # Gera a estrutura de arquivos e concede permissão
@@ -104,12 +104,11 @@ ls -la public
 echo ''
 
 if [ $(docker ps -a -q -f name="$project_title-web") ] || [ $(docker ps -a -q -f name="$project_title-db") ]; then
-	echo 'Já existem containeres com o mesmo nome da estrutura criada!'
-	exit 1
+    echo 'Já existem containeres com o mesmo nome da estrutura criada!'
+    exit 1
 fi
 
 chmod -R 777 .
 docker-compose up -d
 
 exit 0
-
