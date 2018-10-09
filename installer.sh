@@ -1,3 +1,4 @@
+#!/bin/bash
 bin_path='/usr/bin'
 script_name='wp-gen-env'
 script_file="$bin_path/$script_name"
