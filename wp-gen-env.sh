@@ -111,7 +111,7 @@ ls -la public
 echo -e "$RESET"
 
 if [ $(docker ps -a -q -f name="$project_title-web") ] || [ $(docker ps -a -q -f name="$project_title-db") ]; then
-    echo -e '${RED}Já existem containeres com o mesmo nome da estrutura criada!${RESET}'
+    echo -e "${RED}Já existem containeres com o mesmo nome da estrutura criada!${RESET}"
     exit 1
 fi
 
