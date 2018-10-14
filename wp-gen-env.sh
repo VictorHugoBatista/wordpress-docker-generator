@@ -119,14 +119,19 @@ fi
 echo -e "${BLUE}Iniciando ambiente...${RESET}"
 docker-compose up -d
 echo -e "${GREEN}Ambiente inicializado!${RESET}"
-sudo chmod -R 777 .
 echo
+
+sudo chmod -R 777 .
 
 # Gera arquivo wp-config.php e ajusta as permissões do ambiente
 echo -e "${BLUE}Gerando arquivo wp-config.php...${RESET}"
 sleep 5s
 docker-compose run --rm wp-cli core config --dbhost=$project_title-db --dbname=$database_name --dbuser=root --dbpass=$root_password --locale=pt_BR > /dev/null
-echo -e "${GREEN}Arquivo wp-config.php gerado com sucesso!${RESET}"
+if [ 0 -eq $? ]; then
+    echo -e "${GREEN}Arquivo wp-config.php gerado com sucesso!${RESET}"
+else
+    echo -e "${RED}Erro na geração do arquivo wp-config.php!${RESET}"
+fi
 sudo chmod -R 755 .
 
 exit 0
