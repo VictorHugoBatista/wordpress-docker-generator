@@ -115,7 +115,26 @@ if [ $(docker ps -a -q -f name="$project_title-web") ] || [ $(docker ps -a -q -f
     exit 1
 fi
 
-chmod -R 777 .
+# Inicializa ambiente docker
+echo -e "${BLUE}Iniciando ambiente...${RESET}"
 docker-compose up -d
+echo -e "${GREEN}Ambiente inicializado!${RESET}"
+echo
+
+# abre as permissões para a adição do arquivo wp-config.php.
+sudo chmod -R 777 .
+
+# Gera arquivo wp-config.php
+echo -e "${BLUE}Gerando arquivo wp-config.php...${RESET}"
+sleep 5s # Permite que o arquivo wp-config.php seja criado e configurado com sucessso.
+docker-compose run --rm wp-cli core config --dbhost=$project_title-db --dbname=$database_name --dbuser=root --dbpass=$root_password > /dev/null
+if [ 0 -eq $? ]; then
+    echo -e "${GREEN}Arquivo wp-config.php gerado com sucesso!${RESET}"
+else
+    echo -e "${RED}Erro na geração do arquivo wp-config.php!${RESET}"
+fi
+
+#Ajusta as permissões do ambiente.
+sudo chmod -R 755 .
 
 exit 0
