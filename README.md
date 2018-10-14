@@ -1,5 +1,5 @@
 # wordpress-docker-generator
-Gera automaticamente a estrutura para a criação de ambientes web PHP, Apache e MySQL com docker-compose, adicionando uma instalação wordpress limpa na raíz da /public.
+Gera a estrutua de containeres PHP, Apache e MySQL com docker-compose, adicionando uma instalação Wordpress vazia na raíz do ambiente.
 
 ## Requisitos
  * Sistema que permita a execução de [shell scripts](https://pt.wikipedia.org/wiki/Shell_script)
