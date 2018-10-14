@@ -28,3 +28,11 @@ NOME-DO-PROJETO-web:
     - MYSQL_HOST=NOME-DO-PROJETO-db
     - APACHE_DOC_ROOT=/var/www/html/APACHE-ROOT
 
+wp-cli:
+  image: tatemz/wp-cli
+  volumes_from:
+    - NOME-DO-PROJETO-web
+  links:
+    - NOME-DO-PROJETO-db
+  entrypoint: wp
+  command: "--info"
