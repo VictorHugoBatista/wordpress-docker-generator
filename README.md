@@ -38,6 +38,18 @@ Gera automaticamente a estrutura para a criação de ambientes web PHP, Apache e
   |- docker-compose.yml (arquivo já com as configurações iniciais)
   ```
 
+## WP-CLI
+Os comandos do WP-CLI são disponibilizados por meio de um container de imagem **tatemz/wp-cli**.
+O comando abaixo deve ser executado em qualquer subdiretório do ambiente:
+```
+docker-compose run --rm wp-cli
+```
+Você também pode criar um alias para encurtar o comando. Exemplo:
+```
+alias wp="docker-compose run --rm wp-cli"
+```
+Dessa forma você poderá efetuar comandos com **wp plugin install**, da mesma forma que faria fora do docker.
+
 ## Dicas importantes
  * O MySQL deve ser referenciado pelo nome do container MySQL gerado automaticamente (definido pelo título do projeto seguido de **-db**) e não por localhost.
  * Os containeres podem ser parados executando o comando **docker-compose stop**, reiniciados com o comando **docker-compose restart** e inicializados com o comando **docker-compose up -d** na raíz da estrutura de diretórios gerada.
