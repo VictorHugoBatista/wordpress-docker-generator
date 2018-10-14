@@ -115,7 +115,10 @@ if [ $(docker ps -a -q -f name="$project_title-web") ] || [ $(docker ps -a -q -f
     exit 1
 fi
 
-chmod -R 777 .
 docker-compose up -d
+sudo chmod -R 777 .
+sleep 5s
+docker-compose run --rm wp-cli core config --dbhost=$project_title-db --dbname=$database_name --dbuser=root --dbpass=$root_password --locale=pt_BR
+sudo chmod -R 755 .
 
 exit 0
